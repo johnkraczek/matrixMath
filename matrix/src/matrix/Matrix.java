@@ -13,22 +13,36 @@ public class Matrix {
 	public Matrix() {
 
 		int first = getMatrix("First");
-		int second = getMatrix("Second");
+		//int second = getMatrix("Second");
 		boolean operation = getOperation();
 
 		if (operation) {
 			
 		} else {
-			multiply(matrix[first],matrix[second]);
+			printMatrix(matrix[first]);
+			
+			System.out.println(" X ");
+			
+			printMatrix(matrix[first]);
+			
+			int[][] result = multiply(matrix[first],matrix[first]);
+			
+			System.out.println(" = ");
+			
+			printMatrix(result);
+			
 		}
 
 	}
 	
-	public int[][] add(int[][] first, int[][] second){
+	//public int[][] add(int[][] first, int[][] second){
 		
 		
-		return int[][];
-	}
+		
+		
+		
+		//return int[][];
+	//}
 
 	public int[][] multiply(int[][] first, int[][] second) {
 		
@@ -38,12 +52,32 @@ public class Matrix {
 		int sCol = second[0].length;
 		
 		if (fCol != sRow){
-			throw new IllegalArgumentException("Your Rows for Matrix 1 did not match Cols for Matrix 2");
+			throw new IllegalArgumentException("The Rows and Cols Of your two matricies do not match; Cannot Multiply");
 		}
 		
 		int[][] result = new int[fRow][sCol];
 		
+		for (int i = 0; i < fRow; i++) { // aRow
+            for (int j = 0; j < sCol; j++) { // bColumn
+                for (int k = 0; k < fCol; k++) { // aColumn
+                    result[i][j] += first[i][k] * second[k][j];
+                }
+            }
+        }
+		
 		return result;
+	}
+	
+	public void printMatrix(int[][] input){
+		
+		int row = input.length;
+		int col = input[0].length;
+		
+		for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++)
+                System.out.print(input[i][j] + ", ");
+        }
+		System.out.println();
 	}
 
 	public boolean getOperation() {
@@ -53,8 +87,7 @@ public class Matrix {
 		boolean operation = true;
 		boolean notFound = true;
 		while (notFound) {
-			System.out
-					.println("Do you want to Add or Multiply (input '+' or 'x')");
+			System.out.println("Do you want to Add or Multiply (input '+' or 'x')");
 			answer = in.nextLine();
 
 			if (answer.equalsIgnoreCase("+") || answer.equalsIgnoreCase("x")) {
