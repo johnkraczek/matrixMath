@@ -16,8 +16,18 @@ public class Matrix {
 		int second = getMatrix("Second");
 		boolean operation = getOperation();
 
-		if (false) {
+		if (operation) {
+			printMatrix(matrix[first]);
 			
+			System.out.println(" + ");
+			
+			printMatrix(matrix[second]);
+			
+			int[][] result = add(matrix[first],matrix[second]);
+			
+			System.out.println(" = ");
+			
+			printMatrix(result);
 		} else {
 			printMatrix(matrix[first]);
 			
@@ -40,9 +50,19 @@ public class Matrix {
 	int sRow = second. length;
 	int fCol = first[0].length;
 	int sCol = second[0].length;
-		
+	
+	
+	if (fCol != sCol || fRow !=sRow ){
+		throw new IllegalArgumentException("Only Matricies of the same size may be added together.");
+	}
 		
 	int[][] result = new int[fRow][sCol];
+	
+	for (int i = 0; i < fRow; i++) { // aRow
+        for (int j = 0; j < sCol; j++) { // bColumn
+                result[i][j] += first[i][j] + second[i][j];
+            }
+        }
 		
 		return result;
 	}
@@ -60,9 +80,9 @@ public class Matrix {
 		
 		int[][] result = new int[fRow][sCol];
 		
-		for (int i = 0; i < fRow; i++) { // aRow
-            for (int j = 0; j < sCol; j++) { // bColumn
-                for (int k = 0; k < fCol; k++) { // aColumn
+		for (int i = 0; i < fRow; i++) {
+            for (int j = 0; j < sCol; j++) {
+                for (int k = 0; k < fCol; k++) {
                     result[i][j] += first[i][k] * second[k][j];
                 }
             }
