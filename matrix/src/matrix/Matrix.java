@@ -13,19 +13,19 @@ public class Matrix {
 	public Matrix() {
 
 		int first = getMatrix("First");
-		//int second = getMatrix("Second");
+		int second = getMatrix("Second");
 		boolean operation = getOperation();
 
-		if (operation) {
+		if (false) {
 			
 		} else {
 			printMatrix(matrix[first]);
 			
 			System.out.println(" X ");
 			
-			printMatrix(matrix[first]);
+			printMatrix(matrix[second]);
 			
-			int[][] result = multiply(matrix[first],matrix[first]);
+			int[][] result = multiply(matrix[first],matrix[second]);
 			
 			System.out.println(" = ");
 			
@@ -35,14 +35,17 @@ public class Matrix {
 
 	}
 	
-	//public int[][] add(int[][] first, int[][] second){
+	public int[][] add(int[][] first, int[][] second){
+	int fRow = first.length;
+	int sRow = second. length;
+	int fCol = first[0].length;
+	int sCol = second[0].length;
 		
 		
+	int[][] result = new int[fRow][sCol];
 		
-		
-		
-		//return int[][];
-	//}
+		return result;
+	}
 
 	public int[][] multiply(int[][] first, int[][] second) {
 		
@@ -52,7 +55,7 @@ public class Matrix {
 		int sCol = second[0].length;
 		
 		if (fCol != sRow){
-			throw new IllegalArgumentException("The Rows and Cols Of your two matricies do not match; Cannot Multiply");
+			throw new IllegalArgumentException("The Rows and Cols Of your two matricies are not compatable; Cannot Multiply");
 		}
 		
 		int[][] result = new int[fRow][sCol];
@@ -74,10 +77,11 @@ public class Matrix {
 		int col = input[0].length;
 		
 		for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++)
-                System.out.print(input[i][j] + ", ");
+            for (int j = 0; j < col; j++){
+                System.out.print(input[i][j] + " ");
         }
 		System.out.println();
+	}
 	}
 
 	public boolean getOperation() {
@@ -87,7 +91,7 @@ public class Matrix {
 		boolean operation = true;
 		boolean notFound = true;
 		while (notFound) {
-			System.out.println("Do you want to Add or Multiply (input '+' or 'x')");
+			System.out.print("Do you want to Add or Multiply (input '+' or 'x')");
 			answer = in.nextLine();
 
 			if (answer.equalsIgnoreCase("+") || answer.equalsIgnoreCase("x")) {
@@ -140,21 +144,21 @@ public class Matrix {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	public int getMatrix(String Num) {
 		Scanner in = new Scanner(System.in);
 		String answer;
 		boolean notFound = true;
 		while (notFound) {
-			System.out.println("What is " + Num
+			System.out.print("What is " + Num
 					+ " Matrix (input 2x2,2x3,3x2,3x3):");
 			answer = in.nextLine();
 			notFound = checkInput(answer);
 
 			if (notFound) {
 				System.out
-						.println("Input not valid please enter '2x2','2x3','3x2','3x3'");
+						.print("Input not valid please enter '2x2','2x3','3x2','3x3'");
 			} else {
-				in.close();
 				return parseInput(answer);
 			}
 
